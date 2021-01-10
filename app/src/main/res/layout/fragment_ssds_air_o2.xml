@@ -1,0 +1,534 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".SsdsAirO2Fragment">
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:isScrollContainer="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:context=".SsdsActivity">
+
+
+        <TextView
+            android:id="@+id/textView23"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginLeft="24dp"
+            android:layout_marginTop="24dp"
+            android:text="@string/num_divers"
+            android:textColor="@color/colorTextSecondary"
+            android:textSize="20sp"
+            app:fontFamily="@font/roboto"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <EditText
+            android:id="@+id/numDiversEditText"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="24dp"
+            android:layout_marginRight="24dp"
+            android:background="@drawable/edit_text_border"
+            android:ems="10"
+            android:gravity="center"
+            android:inputType="number"
+            android:textSize="20sp"
+            app:layout_constraintBaseline_toBaselineOf="@+id/textView23"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <TextView
+            android:id="@+id/textView24"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginLeft="24dp"
+            android:layout_marginTop="24dp"
+            android:text="@string/bottom_depth"
+            android:textColor="@color/colorTextSecondary"
+            android:textSize="20sp"
+            app:fontFamily="@font/roboto"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView23" />
+
+        <EditText
+            android:id="@+id/bottomDepthEditText"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="24dp"
+            android:layout_marginRight="24dp"
+            android:background="@drawable/edit_text_border"
+            android:ems="10"
+            android:gravity="center"
+            android:inputType="number"
+            android:textSize="20sp"
+            app:layout_constraintBaseline_toBaselineOf="@+id/textView24"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <TextView
+            android:id="@+id/textView25"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginLeft="24dp"
+            android:layout_marginTop="24dp"
+            android:text="@string/bottom_time"
+            android:textColor="@color/colorTextSecondary"
+            android:textSize="20sp"
+            app:fontFamily="@font/roboto"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView24" />
+
+        <EditText
+            android:id="@+id/bottomTimeEditText"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="24dp"
+            android:layout_marginRight="24dp"
+            android:background="@drawable/edit_text_border"
+            android:ems="10"
+            android:gravity="center"
+            android:inputType="number"
+            android:textSize="20sp"
+            app:layout_constraintBaseline_toBaselineOf="@+id/textView25"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <TextView
+            android:id="@+id/textView26"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginLeft="24dp"
+            android:layout_marginTop="24dp"
+            android:text="@string/deco_required"
+            android:textColor="@color/colorTextSecondary"
+            android:textSize="20sp"
+            app:fontFamily="@font/roboto"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView25" />
+
+        <CheckBox
+            android:id="@+id/decoRequiredCheckBox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Yes"
+            android:textSize="18sp"
+            app:layout_constraintBaseline_toBaselineOf="@+id/textView26"
+            app:layout_constraintEnd_toEndOf="@+id/bottomTimeEditText"
+            app:layout_constraintStart_toStartOf="@+id/bottomTimeEditText" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/decoConstraintLayout"
+            android:layout_width="363dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/ssds_constraint_style"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView26">
+
+            <EditText
+                android:id="@+id/stopTime20ET"
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="16dp"
+                android:background="@drawable/edit_text_border"
+                android:ems="10"
+                android:gravity="center"
+                android:inputType="number"
+                android:textSize="18sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/stopTime30ET"
+                app:layout_constraintStart_toStartOf="@+id/stopTime30ET"
+                app:layout_constraintTop_toBottomOf="@+id/stopTime30ET" />
+
+            <EditText
+                android:id="@+id/stopTime30ET"
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/edit_text_border"
+                android:ems="10"
+                android:gravity="center"
+                android:inputType="number"
+                android:textSize="18sp"
+                app:layout_constraintBaseline_toBaselineOf="@+id/textView35"
+                app:layout_constraintEnd_toEndOf="@+id/stopTime40ET"
+                app:layout_constraintStart_toStartOf="@+id/stopTime40ET" />
+
+            <EditText
+                android:id="@+id/stopTime40ET"
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/edit_text_border"
+                android:ems="10"
+                android:gravity="center"
+                android:inputType="number"
+                android:textSize="18sp"
+                app:layout_constraintBaseline_toBaselineOf="@+id/textView34"
+                app:layout_constraintEnd_toEndOf="@+id/stopTime50ET"
+                app:layout_constraintStart_toStartOf="@+id/stopTime50ET" />
+
+            <EditText
+                android:id="@+id/stopTime60ET"
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/edit_text_border"
+                android:ems="10"
+                android:gravity="center"
+                android:inputType="number"
+                android:textSize="18sp"
+                app:layout_constraintBaseline_toBaselineOf="@+id/textView32"
+                app:layout_constraintEnd_toEndOf="@+id/textView31"
+                app:layout_constraintStart_toStartOf="@+id/textView31" />
+
+            <EditText
+                android:id="@+id/stopTime50ET"
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/edit_text_border"
+                android:ems="10"
+                android:gravity="center"
+                android:inputType="number"
+                android:textSize="18sp"
+                app:layout_constraintBaseline_toBaselineOf="@+id/textView33"
+                app:layout_constraintEnd_toEndOf="@+id/stopTime60ET"
+                app:layout_constraintStart_toStartOf="@+id/stopTime60ET" />
+
+            <CheckBox
+                android:id="@+id/o2At30CheckBox"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="16dp"
+                android:layout_marginRight="16dp"
+                android:text="O2"
+                android:textSize="18sp"
+                app:layout_constraintBaseline_toBaselineOf="@+id/textView35"
+                app:layout_constraintEnd_toStartOf="@+id/textView35" />
+
+            <TextView
+                android:id="@+id/textView30"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="48dp"
+                android:layout_marginLeft="48dp"
+                android:layout_marginTop="16dp"
+                android:text="@string/stop_depth"
+                android:textColor="@color/colorTextSecondary"
+                android:textSize="18sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/textView31"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginLeft="24dp"
+                android:text="@string/stop_time"
+                android:textColor="@color/colorTextSecondary"
+                android:textSize="18sp"
+                app:layout_constraintBaseline_toBaselineOf="@+id/textView30"
+                app:layout_constraintStart_toEndOf="@+id/textView30" />
+
+            <TextView
+                android:id="@+id/textView32"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="60"
+                android:textColor="@color/colorTextSecondary"
+                android:textSize="18sp"
+                app:layout_constraintEnd_toEndOf="@+id/textView30"
+                app:layout_constraintStart_toStartOf="@+id/textView30"
+                app:layout_constraintTop_toBottomOf="@+id/textView30" />
+
+            <TextView
+                android:id="@+id/textView33"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="50"
+                android:textColor="@color/colorTextSecondary"
+                android:textSize="18sp"
+                app:layout_constraintEnd_toEndOf="@+id/textView32"
+                app:layout_constraintStart_toStartOf="@+id/textView32"
+                app:layout_constraintTop_toBottomOf="@+id/textView32" />
+
+            <TextView
+                android:id="@+id/textView34"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="40"
+                android:textColor="@color/colorTextSecondary"
+                android:textSize="18sp"
+                app:layout_constraintEnd_toEndOf="@+id/textView33"
+                app:layout_constraintStart_toStartOf="@+id/textView33"
+                app:layout_constraintTop_toBottomOf="@+id/textView33" />
+
+            <TextView
+                android:id="@+id/textView35"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="30"
+                android:textColor="@color/colorTextSecondary"
+                android:textSize="18sp"
+                app:layout_constraintEnd_toEndOf="@+id/textView34"
+                app:layout_constraintStart_toStartOf="@+id/textView34"
+                app:layout_constraintTop_toBottomOf="@+id/textView34" />
+
+            <TextView
+                android:id="@+id/textView36"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="20"
+                android:textColor="@color/colorTextSecondary"
+                android:textSize="18sp"
+                app:layout_constraintEnd_toEndOf="@+id/textView35"
+                app:layout_constraintStart_toStartOf="@+id/textView35"
+                app:layout_constraintTop_toBottomOf="@+id/textView35" />
+
+            <CheckBox
+                android:id="@+id/o2At20CheckBox"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="16dp"
+                android:layout_marginRight="16dp"
+                android:text="O2"
+                android:textSize="18sp"
+                app:layout_constraintBaseline_toBaselineOf="@+id/textView36"
+                app:layout_constraintEnd_toStartOf="@+id/textView36" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <TextView
+            android:id="@+id/textView37"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginLeft="24dp"
+            android:layout_marginTop="24dp"
+            android:text="@string/flood_vol_air"
+            android:textColor="@color/colorTextSecondary"
+            android:textSize="20sp"
+            app:fontFamily="@font/roboto"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/decoConstraintLayout" />
+
+        <EditText
+            android:id="@+id/floodVolAirEditText"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="24dp"
+            android:layout_marginRight="24dp"
+            android:background="@drawable/edit_text_border"
+            android:ems="10"
+            android:gravity="center"
+            android:inputType="numberDecimal"
+            android:textSize="20sp"
+            app:layout_constraintBaseline_toBaselineOf="@+id/textView37"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <Spinner
+            android:id="@+id/floodVolAirSpinner"
+            android:layout_width="100dp"
+            android:layout_height="25dp"
+            android:background="@drawable/spinner_background"
+            android:gravity="left"
+            app:layout_constraintEnd_toEndOf="@+id/floodVolAirEditText"
+            app:layout_constraintStart_toStartOf="@+id/floodVolAirEditText"
+            app:layout_constraintTop_toBottomOf="@+id/floodVolAirEditText" />
+
+        <TextView
+            android:id="@+id/textView38"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginLeft="24dp"
+            android:layout_marginTop="24dp"
+            android:text="@string/number_of_flasks_air"
+            android:textColor="@color/colorTextSecondary"
+            android:textSize="20sp"
+            app:fontFamily="@font/roboto"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/floodVolAirSpinner" />
+
+        <EditText
+            android:id="@+id/numFlasksAirEditText"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/edit_text_border"
+            android:ems="10"
+            android:gravity="center"
+            android:inputType="number"
+            android:textSize="20sp"
+            app:layout_constraintBaseline_toBaselineOf="@+id/textView38"
+            app:layout_constraintEnd_toEndOf="@+id/floodVolAirSpinner"
+            app:layout_constraintStart_toStartOf="@+id/floodVolAirSpinner" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/o2ConstraintLayout"
+            android:layout_width="363dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/ssds_constraint_style"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView38">
+
+            <TextView
+                android:id="@+id/textView39"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                android:layout_marginLeft="12dp"
+                android:layout_marginTop="16dp"
+                android:text="@string/flood_vol_o2"
+                android:textColor="@color/colorTextSecondary"
+                android:textSize="18sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <EditText
+                android:id="@+id/floodVolO2EditText"
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="12dp"
+                android:layout_marginRight="12dp"
+                android:background="@drawable/edit_text_border"
+                android:ems="10"
+                android:gravity="center"
+                android:inputType="numberDecimal"
+                android:textSize="18sp"
+                app:layout_constraintBaseline_toBaselineOf="@+id/textView39"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+            <Spinner
+                android:id="@+id/floodVolO2Spinner"
+                android:layout_width="80dp"
+                android:layout_height="20dp"
+                android:background="@drawable/spinner_background"
+                android:gravity="left"
+                app:layout_constraintEnd_toEndOf="@+id/floodVolO2EditText"
+                app:layout_constraintStart_toStartOf="@+id/floodVolO2EditText"
+                app:layout_constraintTop_toBottomOf="@+id/floodVolO2EditText" />
+
+            <TextView
+                android:id="@+id/textView40"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                android:layout_marginLeft="12dp"
+                android:layout_marginTop="12dp"
+                android:layout_marginBottom="16dp"
+                android:text="@string/number_of_flasks_o2"
+                android:textColor="@color/colorTextSecondary"
+                android:textSize="18sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/floodVolO2Spinner" />
+
+            <EditText
+                android:id="@+id/numFlasksO2EditText"
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/edit_text_border"
+                android:ems="10"
+                android:gravity="center"
+                android:inputType="number"
+                android:textSize="18sp"
+                app:layout_constraintBaseline_toBaselineOf="@+id/textView40"
+                app:layout_constraintEnd_toEndOf="@+id/floodVolO2Spinner"
+                app:layout_constraintStart_toStartOf="@+id/floodVolO2Spinner" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <Button
+            android:id="@+id/calcButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginLeft="24dp"
+            android:layout_marginTop="48dp"
+            android:background="@drawable/blue_button_shape"
+            android:onClick="onClickAirO2"
+            android:padding="20dp"
+            android:elevation="10dp"
+            android:text="@string/button_calculate"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Button"
+            android:textColor="@color/colorTextPrimary"
+            android:textSize="18sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/o2ConstraintLayout" />
+
+        <TextView
+            android:id="@+id/textView22"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginRight="8dp"
+            android:text="@string/air_req_psig"
+            android:textColor="@color/colorTextSecondary"
+            android:textSize="18sp"
+            app:fontFamily="@font/roboto"
+            app:layout_constraintBaseline_toBaselineOf="@+id/airRequiredTextView"
+            app:layout_constraintEnd_toStartOf="@+id/airRequiredTextView" />
+
+        <TextView
+            android:id="@+id/airRequiredTextView"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:layout_marginEnd="24dp"
+            android:layout_marginRight="24dp"
+            android:background="@drawable/edit_text_border"
+            android:gravity="center"
+            android:textSize="24sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/o2ConstraintLayout" />
+
+        <TextView
+            android:id="@+id/o2RequiredTextView"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="24dp"
+            android:layout_marginRight="24dp"
+            android:layout_marginBottom="24dp"
+            android:background="@drawable/edit_text_border"
+            android:gravity="center"
+            android:textSize="24sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/airRequiredTextView" />
+
+        <TextView
+            android:id="@+id/textView41"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginRight="8dp"
+            android:text="@string/o2_req_psig"
+            android:textColor="@color/colorTextSecondary"
+            android:textSize="18sp"
+            app:fontFamily="@font/roboto"
+            app:layout_constraintBaseline_toBaselineOf="@+id/o2RequiredTextView"
+            app:layout_constraintEnd_toStartOf="@+id/o2RequiredTextView" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</ScrollView>

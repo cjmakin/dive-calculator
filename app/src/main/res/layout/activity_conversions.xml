@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:isScrollContainer="true"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ConversionsActivity">
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_column="1"
+        android:layout_weight="1"
+        android:gravity="center_horizontal|center_vertical"
+        android:text="="
+        android:textSize="36sp"
+        app:layout_constraintBaseline_toBaselineOf="@+id/editText1"
+        app:layout_constraintEnd_toStartOf="@+id/editText2"
+        app:layout_constraintStart_toEndOf="@+id/editText1" />
+
+    <EditText
+        android:id="@+id/editText1"
+        android:layout_width="120dp"
+        android:layout_height="wrap_content"
+        android:layout_column="0"
+        android:layout_marginTop="32dp"
+        android:layout_weight="1"
+        android:background="@drawable/edit_text_border"
+        android:ems="10"
+        android:gravity="center"
+        android:importantForAutofill="no"
+        android:inputType="numberDecimal"
+        android:padding="3dp"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toStartOf="@+id/editText2"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView4" />
+
+    <EditText
+        android:id="@+id/editText2"
+        android:layout_width="120dp"
+        android:layout_height="wrap_content"
+        android:layout_column="2"
+        android:layout_weight="1"
+        android:background="@drawable/edit_text_border"
+        android:ems="10"
+        android:gravity="center"
+        android:importantForAutofill="no"
+        android:inputType="number|numberDecimal"
+        android:padding="3dp"
+        android:textSize="24sp"
+        app:layout_constraintBaseline_toBaselineOf="@+id/editText1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/editText1" />
+
+    <TextView
+        android:id="@+id/formulaTextView"
+        android:layout_width="250dp"
+        android:layout_height="150dp"
+        android:layout_gravity="center|center_vertical"
+        android:layout_marginTop="8dp"
+        android:layout_span="2"
+        android:background="@drawable/edit_text_border"
+        android:gravity="center"
+        android:padding="10dp"
+        android:textSize="22sp"
+        android:visibility="gone"
+        app:fontFamily="@font/roboto_medium_italic"
+        app:layout_constraintEnd_toEndOf="@+id/button"
+        app:layout_constraintStart_toStartOf="@+id/button"
+        app:layout_constraintTop_toBottomOf="@+id/button" />
+
+    <Spinner
+        android:id="@+id/spinner1"
+        android:layout_width="120dp"
+        android:layout_height="35dp"
+        android:background="@drawable/spinner_background"
+        android:dropDownWidth="wrap_content"
+        android:popupBackground="@android:drawable/spinner_dropdown_background"
+        app:layout_constraintEnd_toEndOf="@+id/editText1"
+        app:layout_constraintStart_toStartOf="@+id/editText1"
+        app:layout_constraintTop_toBottomOf="@+id/editText1" />
+
+    <Spinner
+        android:id="@+id/spinner2"
+        android:layout_width="120dp"
+        android:layout_height="35dp"
+        android:layout_column="2"
+        android:background="@drawable/spinner_background"
+        android:popupBackground="@android:drawable/spinner_dropdown_background"
+        app:layout_constraintEnd_toEndOf="@+id/editText2"
+        app:layout_constraintStart_toStartOf="@+id/editText2"
+        app:layout_constraintTop_toBottomOf="@+id/editText2" />
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="48dp"
+        android:background="@drawable/yellow_button_shape"
+        android:onClick="showFormula"
+        android:padding="20dp"
+        android:elevation="10dp"
+        android:text="@string/formula_text"
+        android:textAppearance="@style/TextAppearance.MaterialComponents.Button"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toStartOf="@+id/spinner2"
+        app:layout_constraintStart_toEndOf="@+id/spinner1"
+        app:layout_constraintTop_toBottomOf="@+id/spinner1" />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="@string/conversions_button"
+        android:textColor="@color/colorPrimary"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:fontFamily="@font/roboto_medium"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

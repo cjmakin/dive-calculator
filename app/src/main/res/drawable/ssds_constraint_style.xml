@@ -1,0 +1,9 @@
+<shape android:shape="rectangle"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+            <solid android:color="@color/constraint_background_color" />
+            <stroke android:color="@color/colorPrimaryDark"
+                android:width="1.5dp"
+                android:dashGap="0dp"
+                android:dashWidth="0dp" />
+            <corners android:bottomLeftRadius="5dp" android:bottomRightRadius="5dp" android:topLeftRadius="5dp" android:topRightRadius="5dp" />
+        </shape>

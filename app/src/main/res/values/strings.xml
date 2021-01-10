@@ -1,0 +1,151 @@
+<resources>
+
+    <string name="app_name">Dive Calculator</string>
+
+    <!-- Main activity -->
+    <string name="ssds_button">SSDS</string>
+    <string name="scuba_button">Scuba</string>
+    <string name="chamber_button">Chamber</string>
+    <string name="conversions_button">Conversions</string>
+
+
+    <!-- Conversions Activity -->
+    <string name="formula_text">Get Formula</string>
+    <string-array name="conversion_spinner_array">
+        <item>Depth (fsw)</item>
+        <item>ATA</item>
+        <item>PSIG</item>
+        <item>PP ATA</item>
+        <item>PP mmHg</item>
+        <item>Fahrenheit</item>
+        <item>Celsius</item>
+    </string-array>
+
+    <string-array name="conversion_formula_array">
+        <item>(Depth + 33) / 33</item>
+        <item>(ATA - 1) * 33</item>
+        <item>(PSIG + 14.7) / 14.7</item>
+        <item>(ATA - 1) * 14.7</item>
+        <item>Depth * .445</item>
+        <item>PSIG / .445 </item>
+        <item>PP ATA * 760</item>
+        <item>PP mmHg / 760</item>
+        <item>(F - 32) * (5 / 9)</item>
+        <item>((9/5) * C) + 32</item>
+    </string-array>
+
+
+    <!-- SCUBA Activity -->
+    <string-array name="scuba_flood_vol_spinner_array">
+        <item>Alum. 80</item>
+        <item>Alum. 100</item>
+        <item>Alum. 63</item>
+        <item>Alum. 50</item>
+        <item>Steel 120</item>
+        <item>Steel 100</item>
+        <item>Steel 72</item>
+    </string-array>
+
+
+    <string name="depth">Depth (fsw)</string>
+    <string name="duration_minutes">Duration (min)</string>
+    <string name="button_calculate">Calculate</string>
+    <string name="floodable_volume">Floodable Volume (scf)</string>
+    <string name="number_of_flasks">Number of Flasks</string>
+    <string name="cylinder_pressure">Cylinder Pressure (psig)</string>
+    <string name="minimum_cylinder_pressure">Min. Cylinder Pressure (psig)</string>
+    <string name="duration_air_supply">Duration of Air Supply</string>
+
+    <!-- Chamber Activity -->
+    <string name="inner_lock_toggle_button">Inner Lock</string>
+    <string name="outer_lock_toggle_button">Outer Lock</string>
+    <string name="both_toggle_button">Both</string>
+    <string name="treatment_table">Treatment Table</string>
+    <string name="num_patients">Number of Patients</string>
+    <string name="num_tenders">Number of Tenders</string>
+    <string name="bibs_installed">BIBS Overboard Dumb\nInstalled?</string>
+    <string name="o2_scf">O2 (scf) =</string>
+    <string name="air_scf">Air (scf) =</string>
+    <string name="chamber_activity_title">Air / O2 Requirement</string>
+
+    <string-array name="chamber_flood_vol_spinner_array">
+        <item>TRCS</item>
+        <item>SNDL</item>
+        <item>FARCC</item>
+        <item>RCF 5000</item>
+        <item>RCF 6500</item>
+        <item>Army Aluminum</item>
+        <item>Steel Chamber</item>
+        <item>Steel (T-ARS 50)</item>
+    </string-array>
+
+    <string-array name="treatment_table_flood_vol_spinner_array">
+        <item>TT 5</item>
+        <item>TT 6</item>
+        <item>TT 6A (165 fsw)</item>
+        <item>TT 9</item>
+    </string-array>
+
+    <!-- SSDS Activity -->
+
+    <!-- Air / O2 Requirements -->
+    <string name="num_divers">Number of Divers</string>
+    <string name="bottom_depth">Bottom Depth (fsw)</string>
+    <string name="bottom_time">Bottom Time (min)</string>
+    <string name="deco_required">Decompression Required?</string>
+    <string name="stop_depth">Stop Depth (fsw)</string>
+    <string name="stop_time">Stop Time (min)</string>
+    <string name="flood_vol_air">Floodable Volume (Air)</string>
+    <string name="flood_vol_o2">Floodable Volume (O2)</string>
+    <string name="number_of_flasks_air">Number of Flasks (Air)</string>
+    <string name="number_of_flasks_o2">Number of Flasks (O2)</string>
+    <string name="o2_req_psig">O2 (psig) =</string>
+    <string name="air_req_psig">Air (psig) =</string>
+
+    <string-array name="ssds_calculation_spinner">
+        <item>Air / O2 Requirements</item>
+        <item>EGS Requirement</item>
+    </string-array>
+
+    <string-array name="flood_vol_ssds_air_spinner">
+        <item>FADS III ASRA</item>
+        <item>MK3 (LWDS)</item>
+        <item>SDASS-DASS</item>
+        <item>SDASS-VTA Tank</item>
+        <item>Mini VTA</item>
+    </string-array>
+
+    <string-array name="flood_vol_ssds_o2_spinner">
+        <item>K-Bottle</item>
+        <item>J-Bottle</item>
+    </string-array>
+
+    <string name="time_to_stage">Time to Stage (min)</string>
+    <string name="depth_first_stop">Depth of 1st Stop (fsw)</string>
+    <string name="min_egs_psi">Minimum PSI</string>
+    <string name="first_stage_overbottom">1st Stage Overbottom (psig)</string>
+    <string name="title_activity_navigation">NavigationActivity</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="menu_home">Home</string>
+    <string name="menu_gallery">Gallery</string>
+    <string name="menu_slideshow">Slideshow</string>
+
+    <string name="home_second">Home Second</string>
+    <string name="title_activity_navigation_drawer">NavigationDrawer</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="first_fragment_label">First Fragment</string>
+    <string name="second_fragment_label">Second Fragment</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+
+    <string name="hello_first_fragment">Hello first fragment</string>
+    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+    <string name="layers_array" />
+
+</resources>

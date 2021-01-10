@@ -1,0 +1,2 @@
+rootProject.name='Diving Calculator'
+include ':app'

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ripple xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_height="wrap_content"
+    android:layout_width="wrap_content"
+    android:color="@color/colorSecondaryDark"
+        >
+    <item android:id="@android:id/mask">
+        <shape android:shape="rectangle">
+            <solid android:color="@color/colorPrimaryDark" />
+            <corners android:radius="5dp" />
+        </shape>
+    </item>
+
+    <item>
+        <layer-list>
+             <item android:id="@android:id/background">
+                <shape android:shape="rectangle">
+                     <gradient
+                android:angle="90"
+                android:endColor="@color/colorSecondaryLight"
+                android:startColor="@color/colorSecondary"
+                android:type="linear" />
+            <corners android:radius="5dp" />
+            <padding android:right="10dp"/>
+                </shape>
+            </item>
+            <item>
+                <bitmap
+                    android:gravity="end"
+                    android:src="@drawable/spinner_arrow"/>
+            </item>
+        </layer-list>
+    </item>
+</ripple>
