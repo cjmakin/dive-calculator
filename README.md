@@ -13,4 +13,8 @@ Calculations include: \
 -Commonly used conversions\
 \
 All formulas and diving equipment information were obtained from the US Navy Diving Manual, Rev.7.
-
+\
+# Screenshots
+![Splash Screen](https://raw.githubusercontent.com/cjmakin/dive_calculator/master/screenshots/Screen%20Shot%202021-01-10%20at%2019.33.38.png)
+![Splash Screen](https://raw.githubusercontent.com/cjmakin/dive_calculator/master/screenshots/main_menu.jpg)
+![Splash Screen](https://raw.githubusercontent.com/cjmakin/dive_calculator/master/screenshots/ssds.jpg)
