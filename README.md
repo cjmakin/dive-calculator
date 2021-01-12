@@ -2,7 +2,7 @@
 
 ![Splash Screen](https://raw.githubusercontent.com/cjmakin/dive_calculator/master/app/src/main/res/drawable/splash_white_text.png)
 \
-An Android app that performs commonly used calculations for Navy air diving 🐙.
+Small Android app that performs some commonly used calculations for Navy air diving 🐙.
 
 Calculations include: \
 \
