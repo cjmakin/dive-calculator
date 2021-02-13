@@ -8,9 +8,8 @@
     <string name="chamber_button">Chamber</string>
     <string name="conversions_button">Conversions</string>
 
-
     <!-- Conversions Activity -->
-    <string name="formula_text">Get Formula</string>
+    <string name="formula_textView">Formula</string>
     <string-array name="conversion_spinner_array">
         <item>Depth (fsw)</item>
         <item>ATA</item>
@@ -22,18 +21,17 @@
     </string-array>
 
     <string-array name="conversion_formula_array">
-        <item>(Depth + 33) / 33</item>
-        <item>(ATA - 1) * 33</item>
-        <item>(PSIG + 14.7) / 14.7</item>
-        <item>(ATA - 1) * 14.7</item>
-        <item>Depth * .445</item>
-        <item>PSIG / .445 </item>
-        <item>PP ATA * 760</item>
-        <item>PP mmHg / 760</item>
-        <item>(F - 32) * (5 / 9)</item>
-        <item>((9/5) * C) + 32</item>
+        <item>ATA = (Depth + 33) / 33</item>
+        <item>Depth = (ATA - 1) * 33</item>
+        <item>ATA = (PSIG + 14.7) / 14.7</item>
+        <item>PSIG = (ATA - 1) * 14.7</item>
+        <item>PSIG = Depth * .445</item>
+        <item>Depth = PSIG / .445 </item>
+        <item>PP mmHg = PP ATA * 760</item>
+        <item>PP ATA = PP mmHg / 760</item>
+        <item>C = (F - 32) * (5 / 9)</item>
+        <item>F = ((9/5) * C) + 32</item>
     </string-array>
-
 
     <!-- SCUBA Activity -->
     <string-array name="scuba_flood_vol_spinner_array">
@@ -46,14 +44,13 @@
         <item>Steel 72</item>
     </string-array>
 
-
     <string name="depth">Depth (fsw)</string>
     <string name="duration_minutes">Duration (min)</string>
     <string name="button_calculate">Calculate</string>
     <string name="floodable_volume">Floodable Volume (scf)</string>
     <string name="number_of_flasks">Number of Flasks</string>
     <string name="cylinder_pressure">Cylinder Pressure (psig)</string>
-    <string name="minimum_cylinder_pressure">Min. Cylinder Pressure (psig)</string>
+    <string name="minimum_cylinder_pressure">Minimum Cylinder Pressure (psig)</string>
     <string name="duration_air_supply">Duration of Air Supply</string>
 
     <!-- Chamber Activity -->
@@ -63,7 +60,7 @@
     <string name="treatment_table">Treatment Table</string>
     <string name="num_patients">Number of Patients</string>
     <string name="num_tenders">Number of Tenders</string>
-    <string name="bibs_installed">BIBS Overboard Dumb\nInstalled?</string>
+    <string name="bibs_installed">BIBS Overboard Dump Installed?</string>
     <string name="o2_scf">O2 (scf) =</string>
     <string name="air_scf">Air (scf) =</string>
     <string name="chamber_activity_title">Air / O2 Requirement</string>
@@ -85,8 +82,6 @@
         <item>TT 6A (165 fsw)</item>
         <item>TT 9</item>
     </string-array>
-
-    <!-- SSDS Activity -->
 
     <!-- Air / O2 Requirements -->
     <string name="num_divers">Number of Divers</string>
@@ -120,10 +115,12 @@
         <item>J-Bottle</item>
     </string-array>
 
+    <!-- EGS Requirements -->
     <string name="time_to_stage">Time to Stage (min)</string>
     <string name="depth_first_stop">Depth of 1st Stop (fsw)</string>
     <string name="min_egs_psi">Minimum PSI</string>
     <string name="first_stage_overbottom">1st Stage Overbottom (psig)</string>
+
     <string name="title_activity_navigation">NavigationActivity</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
@@ -138,14 +135,16 @@
 
     <string name="home_second">Home Second</string>
     <string name="title_activity_navigation_drawer">NavigationDrawer</string>
+
     <!-- Strings used for fragments for navigation -->
+
     <string name="first_fragment_label">First Fragment</string>
     <string name="second_fragment_label">Second Fragment</string>
     <string name="next">Next</string>
     <string name="previous">Previous</string>
-
     <string name="hello_first_fragment">Hello first fragment</string>
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
     <string name="layers_array" />
+    <string name="equals_sign">=</string>
 
 </resources>

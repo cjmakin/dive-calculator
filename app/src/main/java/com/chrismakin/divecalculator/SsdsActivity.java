@@ -37,7 +37,7 @@ public class SsdsActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch(item.getItemId()) {
-            case R.id.hardhat:
+            case R.id.ssds:
                 Intent intent = new Intent(this, SsdsActivity.class);
                 this.startActivity(intent);
                 break;

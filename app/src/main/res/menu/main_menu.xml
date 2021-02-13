@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <item android:id="@+id/hardhat"
+    <item android:id="@+id/ssds"
         android:icon="@drawable/ic_ssds_black"
         android:title="@string/ssds_button" />
     <item android:id="@+id/scuba"

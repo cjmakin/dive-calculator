@@ -83,11 +83,12 @@
 
     <TextView
         android:id="@+id/textView6"
-        android:layout_width="wrap_content"
+        android:layout_width="165dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
         android:layout_marginLeft="24dp"
         android:layout_marginTop="24dp"
+        android:gravity="center|start"
         android:text="@string/minimum_cylinder_pressure"
         android:textColor="@color/colorTextSecondary"
         android:textSize="20sp"
@@ -214,12 +215,11 @@
         android:id="@+id/durationTextView"
         android:layout_width="100dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="48dp"
-        android:layout_marginLeft="48dp"
         android:layout_marginBottom="8dp"
         android:background="@drawable/edit_text_border"
         android:gravity="center"
         android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="@+id/calculateButton"
-        app:layout_constraintStart_toEndOf="@+id/calculateButton" />
+        app:layout_constraintEnd_toEndOf="@+id/numFlasksEditText"
+        app:layout_constraintStart_toStartOf="@+id/numFlasksEditText" />
 </androidx.constraintlayout.widget.ConstraintLayout>

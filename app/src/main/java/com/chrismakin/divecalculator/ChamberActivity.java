@@ -1,12 +1,6 @@
 package com.chrismakin.divecalculator;
 
-import androidx.annotation.RequiresApi;
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.annotation.SuppressLint;
-import android.app.ActivityOptions;
 import android.content.Intent;
-import android.os.Build;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -19,30 +13,305 @@ import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AppCompatActivity;
+
+import java.util.Locale;
+
+/**
+ * The ChamberActivity class implements calculations for determining total air / O2 requirements
+ * during recompression treatment tables 5, 6, 6a (to 165fsw), and 9. Calculates for recompression
+ * chambers with and without BIBS overboard dump systems installed.
+ *
+ * @author Christian Makin
+ * @version 1.0
+ * @since 2020-06-24
+ */
 public class ChamberActivity extends AppCompatActivity {
-    private EditText floodVolEditText;
-    private EditText numPatientsEditText;
-    private EditText numTendersEditText;
-    private TextView airReqTextView;
-    private TextView o2ReqTextView;
-    private Spinner floodVolSpinner;
-    private Spinner treatTableSpinner;
-    RadioGroup radioGroup;
-    CheckBox bibsCheckBox;
+    private EditText floodableVolumeEditText;
+    private EditText numberOfPatientsEditText;
+    private EditText numberOfTendersEditText;
+    private TextView airRequirementTextView;
+    private TextView o2RequirementsTextView;
+    private Spinner floodableVolumeSpinner;
+    private Spinner treatmentTableSpinner;
+    private RadioGroup radioGroup;
+    private CheckBox bibsCheckBox;
 
-    private final int[] editTextIds = {R.id.floodVolEditText, R.id.numPatientsEditText, R.id.numTendersEditText};
-    final int[] radioGroupIds = {R.id.innerRadioGroup, R.id.outerRadioGroup, R.id.bothRadioGroup};
+    //Class constants
+    private final int[] EDITTEXT_IDS =
+            {R.id.floodVolEditText, R.id.numPatientsEditText, R.id.numTendersEditText};
+    private final int[] RADIO_GROUP_IDS =
+            {R.id.innerRadioGroup, R.id.outerRadioGroup, R.id.bothRadioGroup};
+    private final double[] INNER_LOCK_FLOODABLE_VOLUMES =
+            {45, 123, 136, 162, 440, 192, 285, 134};
+    private final double[] OUTER_LOCK_FLOODABLE_VOLUMES =
+            {45.5, 69, 65, 61, 144, 37, 140, 68};
+    private final double[] INNER_OUTER_FLOODABLE_VOLUMES =
+            {90.5, 192, 201, 223, 584, 229, 425, 202};
 
-    final double[] innerLockFloodVols = {45, 123, 136, 162, 440, 192, 285, 134};
-    final double[] outerLockFloodVols = {45.5, 69, 65, 61, 144, 37, 140, 68};
-    final double[] bothFloodVols = {90.5, 192, 201, 223, 584, 229, 425, 202};
+    /**
+     * Sets the values in the floodableVolumeSpinner according to which RadioGroup item is
+     * selected (inner, outer, or both).
+     */
+    private void setFloodVolEditText() {
+        int spinnerIndex = floodableVolumeSpinner.getSelectedItemPosition();
+        int selectedRadioGroupId = radioGroup.getCheckedRadioButtonId();
 
+        if (selectedRadioGroupId == RADIO_GROUP_IDS[0]) {
+            floodableVolumeEditText.setText(String.format(
+                    Locale.US, "%10.1f", INNER_LOCK_FLOODABLE_VOLUMES[spinnerIndex]));
+        } else if (selectedRadioGroupId == RADIO_GROUP_IDS[1]) {
+            floodableVolumeEditText.setText(String.format(
+                    Locale.US, "%10.1f", OUTER_LOCK_FLOODABLE_VOLUMES[spinnerIndex]));
+        } else {
+            floodableVolumeEditText.setText(String.format(
+                    Locale.US, "%10.1f", INNER_OUTER_FLOODABLE_VOLUMES[spinnerIndex]));
+        }
+    }
 
-    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
+    /**
+     * Calculates the total air requirement needed for compression to treatment depth.
+     * Multiplies the depth for selected treatment (in ATAs) by the floodable volume of the chamber.
+     * @return double
+     */
+    private double getAirCompressionRequirement() {
+        double depth;
+        int treatmentTableIndex = treatmentTableSpinner.getSelectedItemPosition();
+        double floodVol = Double.parseDouble(floodableVolumeEditText.getText().toString());
+
+        if (treatmentTableIndex == 0 || treatmentTableIndex == 1) {
+            depth = 60;
+        } else if (treatmentTableIndex == 2) {
+            depth = 165;
+        } else {
+            depth = 45;
+        }
+        return ((depth + 33) / 33) * floodVol;
+    }
+
+    /**
+     * Calculates the total air needed for ventilation at treatment depth, respective treatment
+     * stops, and ascent. Number of patients and number of tenders are multiplied by ventilation
+     * requirements (On O2: 12.5 ACFM for each person on O2, On Air: 2 ACFM for each patient, and
+     * 4 ACFM for each tender).
+     * @return double
+     */
+    private double getVentilationRequirement() {
+        double ata;
+        double airOnBottom;
+        double airAtStop;
+        double airOnAscent;
+        double totalAir;
+        int numberOfPatients = Integer.parseInt(numberOfPatientsEditText.getText().toString());
+        int numberOfTenders = Integer.parseInt(numberOfTendersEditText.getText().toString());
+
+        double ventilationRequirementO2 = numberOfPatients * 12.5;
+        double ventilationRequirementAir = (numberOfPatients * 4) + (numberOfTenders * 2);
+
+        int treatmentTableIndex = treatmentTableSpinner.getSelectedItemPosition();
+
+        if (treatmentTableIndex == 0) {
+            ata = (60 + 33.0) / 33;
+            airOnBottom = (ata * ventilationRequirementO2 * 40)
+                    + (ata * ventilationRequirementAir * 5);
+            ata = (30 + 33.0) / 33;
+            airOnAscent = (ata * ventilationRequirementO2 * 60)
+                    + (((15 + 33) / 33.0) * (25 * numberOfTenders) * 30);
+            airAtStop = (ata * ventilationRequirementO2 * 20)
+                    + (ata * ventilationRequirementAir * 10);
+            totalAir = airOnBottom + airOnAscent + airAtStop;
+
+        } else if (treatmentTableIndex == 1) {
+            ata = (60 + 33.0) / 33;
+            airOnBottom = (ata * ventilationRequirementO2 * 60)
+                    + (ata * ventilationRequirementAir * 15);
+            ata = (30 + 33.0) / 33;
+            airOnAscent = (ata * ventilationRequirementO2 * 60)
+                    + (((15 + 33) / 33.0) * (25 * numberOfTenders) * 30);
+            airAtStop = (ata * ventilationRequirementO2 * 120)
+                    + (ata * ventilationRequirementAir * 30) + (((30 + 33) / 33.0)
+                    * (25 * numberOfTenders) * 30);
+            totalAir = airOnBottom + airOnAscent + airAtStop;
+
+        } else if (treatmentTableIndex == 2) {
+            ata = (165 + 33.0) / 33;
+            airOnBottom = ata * ventilationRequirementAir * 30;
+            ata = (30 + 33.0) / 33;
+            airOnAscent = (ata * ventilationRequirementO2 * 60)
+                    + (((15 + 33) / 33.0) * (25 * numberOfTenders) * 30)
+                    + (((112.5 + 33) / 33) * ventilationRequirementAir);
+            airAtStop = (((60 + 33.0) / 33) * ventilationRequirementO2 * 60)
+                    + (((60 + 33.0) / 33) * ventilationRequirementAir * 15)
+                    + (ata * ventilationRequirementO2 * 120)
+                    + (ata * ventilationRequirementAir * 30);
+            totalAir = airOnBottom + airOnAscent + airAtStop;
+
+        } else {
+            ata = (45 + 33.0) / 33;
+            airOnBottom = (ata * ventilationRequirementO2 * 90)
+                    + (ata * ventilationRequirementAir * 10) + (ata * (numberOfTenders * 25) * 15);
+            ata = (22.5 + 33.0) / 33;
+            airOnAscent = (ata * ventilationRequirementO2 * 2.25)
+                    + (ata * (25 * numberOfTenders) * 2.25);
+            totalAir = airOnBottom + airOnAscent;
+        }
+        return totalAir;
+    }
+
+    /**
+     * Calculates the total O2 needed for selected treatment table during treatment depth, stops,
+     * and ascent. Calculation assumes minimum tender O2 breathing requirements (i.e. no previous
+     * hyperbaric exposure).
+     * @return double
+     */
+    private double getO2Requirement() {
+        int treatmentTableIndex = treatmentTableSpinner.getSelectedItemPosition();
+        int numberOfPatients = Integer.parseInt(numberOfPatientsEditText.getText().toString());
+        int numberOfTenders = Integer.parseInt(numberOfTendersEditText.getText().toString());
+        double o2Bottom;
+        double o2Stop;
+        double o2Ascent;
+        double totalO2;
+        double ata;
+        double acfm = 0.3;
+
+        if (treatmentTableIndex == 0) {
+            ata = (60 + 33) / 33.0;
+            o2Bottom = ata * acfm * numberOfPatients * 40;
+            ata = (30 + 33) / 33.0;
+            o2Ascent = (ata * acfm * numberOfPatients * 60)
+                    + (((15 + 33) / 33.0) * numberOfTenders * 30);
+            o2Stop = (ata * acfm * numberOfPatients * 20);
+            totalO2 = o2Bottom + o2Ascent + o2Stop;
+
+        } else if (treatmentTableIndex == 1) {
+            ata = (60 + 33) / 33.0;
+            o2Bottom = ata * acfm * numberOfPatients * 60;
+            ata = (30 + 33) / 33.0;
+            o2Ascent = (ata * acfm * numberOfPatients * 60)
+                    + (((15 + 33) / 33.0) * numberOfTenders * 30);
+            o2Stop = (ata * acfm * numberOfPatients * 120)
+                    + (ata * acfm * numberOfTenders * 30);
+            totalO2 = o2Bottom + o2Ascent + o2Stop;
+
+        } else if (treatmentTableIndex == 2) {
+            ata = (60 + 33) / 33.0;
+            o2Bottom = ata * acfm * numberOfPatients * 60;
+            ata = (30 + 33) / 33.0;
+            o2Ascent = (ata * acfm * numberOfPatients * 60)
+                    + (((15 + 33) / 33.0) * numberOfTenders * 30);
+            o2Stop = (ata * acfm * numberOfPatients * 120)
+                    + (ata * acfm * numberOfTenders * 60);
+            totalO2 = o2Bottom + o2Ascent + o2Stop;
+
+        } else {
+            ata = (45 + 33) / 33.0;
+            totalO2 = (ata * acfm * numberOfPatients * 90)
+                    + (ata * acfm * numberOfTenders * 15)
+                    + (((22.5 + 33) / 33) * acfm * numberOfTenders * 2.25);
+        }
+        return totalO2;
+    }
+
+    /**
+     * On click method for calculate button.
+     * @param view button view
+     */
+    public void onClick(View view) {
+        int totalAir;
+
+        if (fieldIsFilled()) {
+            int totalO2 = (int) (getO2Requirement()) + 1;
+            o2RequirementsTextView.setText(String.format(Locale.US, "%d", totalO2));
+
+            if (bibsCheckBox.isChecked()) {
+                totalAir = (int) getAirCompressionRequirement() + 1;
+                airRequirementTextView.setText(String.format(Locale.US, "%d", totalAir));
+            } else if (!bibsCheckBox.isChecked()) {
+                totalAir = (int) (getAirCompressionRequirement() + getVentilationRequirement()) + 1;
+                airRequirementTextView.setText(String.format(Locale.US, "%d", totalAir));
+            }
+        }
+    }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_chamber);
+
+        //Set Spinner Values
+        treatmentTableSpinner = findViewById(R.id.treatTableSpinner);
+        floodableVolumeSpinner = findViewById(R.id.egsFloodVolET);
+
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(
+                this, R.array.chamber_flood_vol_spinner_array,
+                android.R.layout.simple_spinner_dropdown_item);
+        floodableVolumeSpinner.setAdapter(adapter);
+
+        adapter = ArrayAdapter.createFromResource(
+                this, R.array.treatment_table_flood_vol_spinner_array,
+                android.R.layout.simple_spinner_dropdown_item);
+
+        treatmentTableSpinner.setAdapter(adapter);
+
+        //Set RadioGroup and CheckBox
+        radioGroup = findViewById(R.id.radioGroup);
+        bibsCheckBox = findViewById(R.id.bibsCheckBox);
+
+        //Set EditTexts and TextView
+        floodableVolumeEditText = findViewById(R.id.floodVolEditText);
+        numberOfPatientsEditText = findViewById(R.id.numPatientsEditText);
+        numberOfTendersEditText = findViewById(R.id.numTendersEditText);
+        airRequirementTextView = findViewById(R.id.totalAirTextView);
+        o2RequirementsTextView = findViewById(R.id.totalO2TextView);
+        floodableVolumeEditText.setText(String.format(
+                Locale.US, "%10.2f", INNER_LOCK_FLOODABLE_VOLUMES[0]));
+
+        //Spinner listener, radio group listener for updating floodable volume EditText
+        floodableVolumeSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                setFloodVolEditText();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+            }
+        });
+
+        radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                setFloodVolEditText();
+            }
+        });
+    }
+
+    /**
+     * Returns true if all required fields are filled. Sets an error prompting the user to
+     * input a value if not filled.
+     * @return boolean
+     */
+    private boolean fieldIsFilled() {
+        boolean isFilled = true;
+
+        for (int id : EDITTEXT_IDS) {
+            EditText t = findViewById(id);
+            if (t.getText().toString().trim().equalsIgnoreCase("")) {
+                t.setError("Enter a value");
+                isFilled = false;
+            } else if (Double.parseDouble(t.getText().toString()) == 0) {
+                t.setError("Enter a value greater than 0");
+                isFilled = false;
+            }
+        }
+        return isFilled;
+    }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch(item.getItemId()) {
-            case R.id.hardhat:
+        switch (item.getItemId()) {
+            case R.id.ssds:
                 Intent intent = new Intent(this, SsdsActivity.class);
                 this.startActivity(intent);
                 break;
@@ -61,246 +330,13 @@ public class ChamberActivity extends AppCompatActivity {
             default:
                 return super.onOptionsItemSelected(item);
         }
-
         return true;
     }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main_menu, menu);
         return true;
-
-    }
-
-
-    @SuppressLint("SetTextI18n")
-    public void onClick(View view) {
-
-        int totalAir;
-
-        if (fieldIsFilled()) {
-
-            int totalO2 = (int) (getO2Requirement()) + 1;
-            o2ReqTextView.setText(Integer.toString(totalO2));
-
-            if (bibsCheckBox.isChecked()) {
-                totalAir = (int) getCompressionRequirement() + 1;
-                airReqTextView.setText(Integer.toString(totalAir));
-            } else if (!bibsCheckBox.isChecked()) {
-                totalAir = (int) (getCompressionRequirement() + getVentilationRequirement()) + 1;
-                airReqTextView.setText(Integer.toString(totalAir));
-            }
-        }
-    }
-
-    public boolean fieldIsFilled() {
-
-        boolean isFilled = true;
-
-        for(int id : editTextIds) {
-            EditText t = findViewById(id);
-            if (t.getText().toString().trim().equalsIgnoreCase("")) {
-                t.setError("Enter a value");
-                isFilled = false;
-            } else if (Double.parseDouble(t.getText().toString()) == 0) {
-                t.setError("Enter a value greater than 0");
-                isFilled = false;
-            }
-        }
-        return isFilled;
-    }
-
-
-    @SuppressLint("SetTextI18n")
-    public void setFloodVolEditText() {
-
-        int spinnerIndex = floodVolSpinner.getSelectedItemPosition();
-        int selectedRadioGroupId = radioGroup.getCheckedRadioButtonId();
-
-        if (selectedRadioGroupId == radioGroupIds[0]) {
-            floodVolEditText.setText(Double.toString(innerLockFloodVols[spinnerIndex]));
-        } else if (selectedRadioGroupId == radioGroupIds[1]) {
-            floodVolEditText.setText(Double.toString(outerLockFloodVols[spinnerIndex]));
-        } else {
-            floodVolEditText.setText(Double.toString(bothFloodVols[spinnerIndex]));
-        }
-
-    }
-
-    public double getCompressionRequirement() {
-
-        double depth;
-        int treatTableIndex = treatTableSpinner.getSelectedItemPosition();
-        double floodVol = Double.parseDouble(floodVolEditText.getText().toString());
-
-        if (treatTableIndex == 0 || treatTableIndex == 1) {
-            depth = 60;
-        } else if (treatTableIndex == 2) {
-            depth = 165;
-        } else {
-            depth = 45;
-        }
-
-        return (depth / 33) * floodVol;
-
-    }
-
-    public double getVentilationRequirement() {
-
-        double ata;
-        double airOnBottom;
-        double airAtStop;
-        double airOnAscent;
-        double totalAir;
-        int numPatients = Integer.parseInt(numPatientsEditText.getText().toString());
-        int numTenders = Integer.parseInt(numTendersEditText.getText().toString());
-
-        double ventRequirementO2 = numPatients * 12.5;
-        double ventRequirementAir = (numPatients * 4) + (numTenders * 2);
-
-        int treatTableIndex = treatTableSpinner.getSelectedItemPosition();
-
-        if (treatTableIndex == 0) {
-
-            ata = (60 + 33.0) / 33;
-            airOnBottom = (ata * ventRequirementO2 * 40) + (ata * ventRequirementAir * 5);
-            ata = (30 + 33.0) / 33;
-            airOnAscent = (ata * ventRequirementO2 * 60) + (((15 + 33) / 33.0) * (25 * numTenders) * 30);
-            airAtStop = (ata * ventRequirementO2 * 20) + (ata * ventRequirementAir * 10);
-            totalAir = airOnBottom + airOnAscent + airAtStop;
-
-
-        } else if (treatTableIndex == 1) {
-
-            ata = (60 + 33.0) / 33;
-            airOnBottom = (ata * ventRequirementO2 * 60) + (ata * ventRequirementAir * 15);
-            ata = (30 + 33.0) / 33;
-            airOnAscent = (ata * ventRequirementO2 * 60) + (((15 + 33) / 33.0) * (25 * numTenders) * 30);
-            airAtStop = (ata * ventRequirementO2 * 120) + (ata * ventRequirementAir * 30) + (((30 + 33) / 33.0) * (25 * numTenders) * 30);
-            totalAir = airOnBottom + airOnAscent + airAtStop;
-
-
-        } else if (treatTableIndex == 2) {
-
-            ata = (165 + 33.0) / 33;
-            airOnBottom = ata * ventRequirementAir * 30;
-            ata = (30 + 33.0) / 33;
-            airOnAscent = (ata * ventRequirementO2 * 60) + (((15 + 33) / 33.0) * (25 * numTenders) * 30) + (((112.5 + 33) / 33) * ventRequirementAir);
-            airAtStop = (((60 + 33.0) / 33) * ventRequirementO2 * 60) + (((60 + 33.0) / 33) * ventRequirementAir * 15) + (ata * ventRequirementO2 * 120) + (ata * ventRequirementAir * 30);
-            totalAir = airOnBottom + airOnAscent + airAtStop;
-
-        } else {
-
-            ata = (45 + 33.0) / 33;
-            airOnBottom = (ata * ventRequirementO2 * 90) + (ata * ventRequirementAir * 10) + (ata * (numTenders * 25) * 15);
-            ata = (22.5 + 33.0) / 33;
-            airOnAscent = (ata * ventRequirementO2 * 2.25) + (ata * (25 * numTenders) * 2.25);
-            totalAir = airOnBottom + airOnAscent;
-
-        }
-
-        return totalAir;
-
-    }
-
-    public double getO2Requirement() {
-
-        int treatTableIndex = treatTableSpinner.getSelectedItemPosition();
-        int numPatients = Integer.parseInt(numPatientsEditText.getText().toString());
-        int numTenders = Integer.parseInt(numTendersEditText.getText().toString());
-        double o2Bottom;
-        double o2Stop;
-        double o2Ascent;
-        double totalO2;
-        double ata;
-        double acfm = 0.3;
-
-
-        if (treatTableIndex == 0) {
-
-            ata = (60 + 33) / 33.0;
-            o2Bottom = ata * acfm * numPatients * 40;
-            ata = (30 + 33) / 33.0;
-            o2Ascent = (ata * acfm * numPatients * 60) + (((15 + 33) / 33.0) * numTenders * 30);
-            o2Stop = (ata * acfm * numPatients * 20);
-            totalO2 = o2Bottom + o2Ascent + o2Stop;
-
-        } else if (treatTableIndex == 1) {
-
-            ata = (60 + 33) / 33.0;
-            o2Bottom = ata * acfm * numPatients * 60;
-            ata = (30 + 33) / 33.0;
-            o2Ascent = (ata * acfm * numPatients * 60) + (((15 + 33) / 33.0) * numTenders * 30);
-            o2Stop = (ata * acfm * numPatients * 120) + (ata * acfm * numTenders * 30);
-            totalO2 = o2Bottom + o2Ascent + o2Stop;
-
-        }   else if (treatTableIndex == 2) {
-
-            ata = (60 + 33) / 33.0;
-            o2Bottom = ata * acfm * numPatients * 60;
-            ata = (30 + 33) / 33.0;
-            o2Ascent = (ata * acfm * numPatients * 60) + (((15 + 33) / 33.0) * numTenders * 30);
-            o2Stop = (ata * acfm * numPatients * 120) + (ata * acfm * numTenders * 60);
-            totalO2 = o2Bottom + o2Ascent + o2Stop;
-
-        } else {
-
-            ata = (45 + 33) / 33.0;
-            totalO2 = (ata * acfm * numPatients * 90) + (ata * acfm * numTenders * 15) + (((22.5 + 33) / 33) * acfm * numTenders * 2.25);
-
-        }
-
-        return totalO2;
-    }
-
-    @SuppressLint("SetTextI18n")
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_chamber);
-
-        //Set Spinner Values
-
-        treatTableSpinner = findViewById(R.id.treatTableSpinner);
-        floodVolSpinner = findViewById(R.id.egsFloodVolET);
-
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.chamber_flood_vol_spinner_array, android.R.layout.simple_spinner_dropdown_item);
-        floodVolSpinner.setAdapter(adapter);
-        adapter =  ArrayAdapter.createFromResource(this, R.array.treatment_table_flood_vol_spinner_array, android.R.layout.simple_spinner_dropdown_item);
-        treatTableSpinner.setAdapter(adapter);
-
-        //Set RadioGroup / checkBox
-        radioGroup = findViewById(R.id.radioGroup);
-        bibsCheckBox = findViewById(R.id.bibsCheckBox);
-
-        //Set EditTexts / TextView
-        floodVolEditText = findViewById(R.id.floodVolEditText);
-        numPatientsEditText = findViewById(R.id.numPatientsEditText);
-        numTendersEditText = findViewById(R.id.numTendersEditText);
-        airReqTextView = findViewById(R.id.totalAirTextView);
-        o2ReqTextView = findViewById(R.id.totalO2TextView);
-
-        floodVolEditText.setText(Double.toString(innerLockFloodVols[0]));
-
-        //Spinner listener, radio group listener for updating floodable volume editText
-        floodVolSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                setFloodVolEditText();
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
-
-        radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(RadioGroup group, int checkedId) {
-                setFloodVolEditText();
-            }
-        });
-
     }
 }
