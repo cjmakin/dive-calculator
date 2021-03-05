@@ -1,10 +1,5 @@
 package com.chrismakin.divecalculator;
 
-import androidx.annotation.RequiresApi;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
-
 import android.annotation.SuppressLint;
 import android.app.ActivityOptions;
 import android.content.Intent;
@@ -17,21 +12,23 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 
+import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
+/**
+ * The SsdsActivity contains a spinner and FragmentContainerView. The user selects either EGS
+ * requirement or Air / O2 Requirement calculation from the spinner which launches the respective
+ * fragment inside the FragmentContainerView.
+ *
+ * @author Christian Makin
+ * @version 1.0.1
+ * @since 2021-03-04
+ */
 public class SsdsActivity extends AppCompatActivity {
-    Fragment SsdsAirO2Fragment;
-    Fragment SsdsEgsFragment;
-    ActivityOptions options;
-
-
-    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
-    public void startSpecificActivity(Class<?> otherActivityClass) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            options = ActivityOptions.makeSceneTransitionAnimation(this);
-        }
-        Intent intent = new Intent(this, otherActivityClass);
-        startActivity(intent, options.toBundle());
-    }
+    Fragment airO2Fragment;
+    Fragment egsFragment;
 
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
     @Override
@@ -59,6 +56,7 @@ public class SsdsActivity extends AppCompatActivity {
 
         return true;
     }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -66,26 +64,26 @@ public class SsdsActivity extends AppCompatActivity {
         return true;
     }
 
-
     @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ssds);
 
-        SsdsAirO2Fragment = new Fragment();
-        SsdsEgsFragment = new Fragment();
+        airO2Fragment = new Fragment();
+        egsFragment = new Fragment();
 
 
-        //Set Fragments in FrameLayout
+        //Sets the AirO2Fragment inside of the FragmentContainerView
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         ft.replace(R.id.flFragment, new SsdsAirO2Fragment());
         ft.commit();
 
-
         //Set Spinner Values
         Spinner chooseCalcSpinner = findViewById(R.id.chooseCalcSpinner);
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.ssds_calculation_spinner, R.layout.spinner_item);
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(
+                this, R.array.ssds_calculation_spinner, R.layout.spinner_item);
+
         chooseCalcSpinner.setAdapter(adapter);
 
         chooseCalcSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -106,10 +104,8 @@ public class SsdsActivity extends AppCompatActivity {
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
-
             }
         });
-
     }
 }
 

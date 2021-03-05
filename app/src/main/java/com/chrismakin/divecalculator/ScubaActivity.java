@@ -1,10 +1,6 @@
 package com.chrismakin.divecalculator;
 
-import androidx.annotation.RequiresApi;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.annotation.SuppressLint;
-import android.app.ActivityOptions;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Build;
@@ -18,6 +14,19 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.AppCompatActivity;
+
+/**
+ * The ScubaActivity class implements calculations for determining the duration of Air Supply
+ * during scuba diving operations. Air supply is calculated using several common cylinder floodable
+ * volumes (from a dropdown menu), depths, cylinder pressure, and preferred minimum cylinder
+ * pressure.
+ *
+ * @author Christian Makin
+ * @version 1.0.1
+ * @since 2021-03-04
+ */
 public class ScubaActivity extends AppCompatActivity {
     private EditText depthEditText;
     private EditText cylPressureEditText;
@@ -31,6 +40,50 @@ public class ScubaActivity extends AppCompatActivity {
             R.id.minCylPressureEditText, R.id.floodVolEditText, R.id.numFlasksEditText};
     private final double[] FLOODABLE_VOLUME_VALUES = {.399, .470, .319, .281, .526, .445, .420};
 
+    /**
+     * Calculates the consumption rate for a diver using a respiratory minute volume of 1.4
+     * and the depth of the diver.
+     * @return The consumption rate of the diver at a given depth
+     */
+    private double calcConsumption() {
+        double depth = Double.parseDouble(depthEditText.getText().toString());
+        double respiratoryMinuteVolume = 1.4;
+        return ((depth + 33) / 33) * respiratoryMinuteVolume;
+    }
+
+    /**
+     * Calculates the air capacity of a set of cylinders given the cylinder pressure, minimum
+     * cylinder pressure, floodable volume of the flask, and number of flasks.
+     * @return The air capacity of the flask(s)
+     */
+    private double calcAirCapacity() {
+        double cylPressure = Double.parseDouble(cylPressureEditText.getText().toString());
+        double minCylPressure = Double.parseDouble(minCylPressureEditText.getText().toString());
+        double floodVol = Double.parseDouble(floodVolEditText.getText().toString());
+        int numFlasks = Integer.parseInt(numFlasksEditText.getText().toString());
+        return ((cylPressure - minCylPressure) / 14.7) * floodVol * numFlasks;
+    }
+
+    /**
+     * Calculates the duration of the flask(s) given the diver's consumption rate and the capacity
+     * of the flask(s).
+     * @param consumption the consumption rate of the diver
+     * @param capacity the capacity of the flask(s)
+     * @return The duration in minutes rounded down to the nearest whole minute
+     */
+    private int calcDuration(double consumption, double capacity) {
+        double duration = capacity / consumption;
+        if (duration < 0) {
+            duration = 0;
+        }
+        return (int)(duration);
+    }
+
+    /**
+     * Returns true if all required fields are filled. Sets an error prompting the user to
+     * input a value if not filled.
+     * @return boolean
+     */
     private boolean fieldIsFilled() {
 
         boolean isFilled = true;
@@ -48,6 +101,10 @@ public class ScubaActivity extends AppCompatActivity {
         return isFilled;
     }
 
+    /**
+     * On click method for calculate button.
+     * @param view button view
+     */
     @SuppressLint("SetTextI18n")
     public void onClick(View view) {
 
@@ -58,27 +115,6 @@ public class ScubaActivity extends AppCompatActivity {
             durationTextView.setText(Integer.toString(duration));
 
         }
-    }
-
-    private double calcConsumption() {
-        double depth = Double.parseDouble(depthEditText.getText().toString());
-        return ((depth + 33) / 33) * 1.4;
-    }
-
-    private double calcAirCapacity() {
-        double cylPressure = Double.parseDouble(cylPressureEditText.getText().toString());
-        double minCylPressure = Double.parseDouble(minCylPressureEditText.getText().toString());
-        double floodVol = Double.parseDouble(floodVolEditText.getText().toString());
-        int numFlasks = Integer.parseInt(numFlasksEditText.getText().toString());
-        return ((cylPressure - minCylPressure) / 14.7) * floodVol * numFlasks;
-    }
-
-    private int calcDuration(double consumption, double capacity) {
-        double duration = capacity / consumption;
-        if (duration < 0) {
-            duration = 0;
-        }
-        return (int)(duration);
     }
 
     @SuppressLint("SetTextI18n")
@@ -152,6 +188,7 @@ public class ScubaActivity extends AppCompatActivity {
 
         return true;
     }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.

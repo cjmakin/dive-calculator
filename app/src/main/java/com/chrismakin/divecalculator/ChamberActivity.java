@@ -23,8 +23,8 @@ import java.util.Locale;
  * chambers with and without BIBS overboard dump systems installed.
  *
  * @author Christian Makin
- * @version 1.0
- * @since 2020-06-24
+ * @version 1.0.1
+ * @since 2021-03-04
  */
 public class ChamberActivity extends AppCompatActivity {
     private EditText floodableVolumeEditText;

@@ -25,8 +25,8 @@ import java.text.DecimalFormat;
  * for diving.
  *
  * @author Christian Makin
- * @version 1.0
- * @since 2020-06-24
+ * @version 1.0.1
+ * @since 2021-03-04
  */
 public class ConversionsActivity extends AppCompatActivity {
     private Spinner leftSpinner;
@@ -43,12 +43,11 @@ public class ConversionsActivity extends AppCompatActivity {
     /**
      * Performs the correct calculation depending on which spinner items the user has selected.
      * EditTexts are updated automatically as the user inputs values (Like the Google conversion
-     * tool). Updates the formula TextView as the user changes spinner items. Lots of if-else
-     * statements to cover all of the possible spinner combinations.
-     * @param inSpinner Spinner that corresponds to the EditText the user is currently typing in.
+     * tool). Updates the formula TextView as the user changes spinner items.
+     * @param inSpinner Spinner that corresponds to the EditText the user is currently typing in
      * @param outSpinner Spinner that corresponds to the output EditText.
-     * @param inEditText EditText that the user is typing in.
-     * @param outEditText EditText that is serving as output.
+     * @param inEditText EditText that the user is typing in
+     * @param outEditText EditText that is serving as output
      */
     private void calculateConversion(Spinner inSpinner, Spinner outSpinner,
                                     EditText inEditText, EditText outEditText) {
