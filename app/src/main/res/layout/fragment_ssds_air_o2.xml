@@ -23,7 +23,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
-            android:layout_marginLeft="24dp"
             android:layout_marginTop="24dp"
             android:text="@string/num_divers"
             android:textColor="@color/colorTextSecondary"
@@ -37,21 +36,21 @@
             android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:layout_marginEnd="24dp"
-            android:layout_marginRight="24dp"
             android:background="@drawable/edit_text_border"
             android:ems="10"
             android:gravity="center"
             android:inputType="number"
             android:textSize="20sp"
             app:layout_constraintBaseline_toBaselineOf="@+id/textView23"
-            app:layout_constraintEnd_toEndOf="parent" />
+            app:layout_constraintEnd_toEndOf="parent"
+            tools:ignore="Autofill"
+            tools:labelFor="@id/numDiversEditText"/>
 
         <TextView
             android:id="@+id/textView24"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
-            android:layout_marginLeft="24dp"
             android:layout_marginTop="24dp"
             android:text="@string/bottom_depth"
             android:textColor="@color/colorTextSecondary"
@@ -65,21 +64,21 @@
             android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:layout_marginEnd="24dp"
-            android:layout_marginRight="24dp"
             android:background="@drawable/edit_text_border"
             android:ems="10"
             android:gravity="center"
             android:inputType="number"
             android:textSize="20sp"
             app:layout_constraintBaseline_toBaselineOf="@+id/textView24"
-            app:layout_constraintEnd_toEndOf="parent" />
+            app:layout_constraintEnd_toEndOf="parent"
+            tools:ignore="Autofill"
+            tools:labelFor="@id/bottomDepthEditText"/>
 
         <TextView
             android:id="@+id/textView25"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
-            android:layout_marginLeft="24dp"
             android:layout_marginTop="24dp"
             android:text="@string/bottom_time"
             android:textColor="@color/colorTextSecondary"
@@ -93,21 +92,21 @@
             android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:layout_marginEnd="24dp"
-            android:layout_marginRight="24dp"
             android:background="@drawable/edit_text_border"
             android:ems="10"
             android:gravity="center"
             android:inputType="number"
             android:textSize="20sp"
             app:layout_constraintBaseline_toBaselineOf="@+id/textView25"
-            app:layout_constraintEnd_toEndOf="parent" />
+            app:layout_constraintEnd_toEndOf="parent"
+            tools:ignore="Autofill"
+            tools:labelFor="@id/bottomTimeEditText"/>
 
         <TextView
             android:id="@+id/textView26"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
-            android:layout_marginLeft="24dp"
             android:layout_marginTop="24dp"
             android:text="@string/deco_required"
             android:textColor="@color/colorTextSecondary"
@@ -120,7 +119,7 @@
             android:id="@+id/decoRequiredCheckBox"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Yes"
+            android:text="@string/yes_air_o2"
             android:textSize="18sp"
             app:layout_constraintBaseline_toBaselineOf="@+id/textView26"
             app:layout_constraintEnd_toEndOf="@+id/bottomTimeEditText"
@@ -151,7 +150,9 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="@+id/stopTime30ET"
                 app:layout_constraintStart_toStartOf="@+id/stopTime30ET"
-                app:layout_constraintTop_toBottomOf="@+id/stopTime30ET" />
+                app:layout_constraintTop_toBottomOf="@+id/stopTime30ET"
+                tools:ignore="Autofill"
+                tools:labelFor="@id/stopTime20ET"/>
 
             <EditText
                 android:id="@+id/stopTime30ET"
@@ -164,7 +165,9 @@
                 android:textSize="18sp"
                 app:layout_constraintBaseline_toBaselineOf="@+id/textView35"
                 app:layout_constraintEnd_toEndOf="@+id/stopTime40ET"
-                app:layout_constraintStart_toStartOf="@+id/stopTime40ET" />
+                app:layout_constraintStart_toStartOf="@+id/stopTime40ET"
+                tools:ignore="Autofill"
+                tools:labelFor="@id/stopTime30ET"/>
 
             <EditText
                 android:id="@+id/stopTime40ET"
@@ -177,7 +180,9 @@
                 android:textSize="18sp"
                 app:layout_constraintBaseline_toBaselineOf="@+id/textView34"
                 app:layout_constraintEnd_toEndOf="@+id/stopTime50ET"
-                app:layout_constraintStart_toStartOf="@+id/stopTime50ET" />
+                app:layout_constraintStart_toStartOf="@+id/stopTime50ET"
+                tools:ignore="Autofill"
+                tools:labelFor="@id/stopTime40ET"/>
 
             <EditText
                 android:id="@+id/stopTime60ET"
@@ -190,7 +195,9 @@
                 android:textSize="18sp"
                 app:layout_constraintBaseline_toBaselineOf="@+id/textView32"
                 app:layout_constraintEnd_toEndOf="@+id/textView31"
-                app:layout_constraintStart_toStartOf="@+id/textView31" />
+                app:layout_constraintStart_toStartOf="@+id/textView31"
+                tools:ignore="Autofill"
+                tools:labelFor="@id/stopTime60ET"/>
 
             <EditText
                 android:id="@+id/stopTime50ET"
@@ -203,15 +210,16 @@
                 android:textSize="18sp"
                 app:layout_constraintBaseline_toBaselineOf="@+id/textView33"
                 app:layout_constraintEnd_toEndOf="@+id/stopTime60ET"
-                app:layout_constraintStart_toStartOf="@+id/stopTime60ET" />
+                app:layout_constraintStart_toStartOf="@+id/stopTime60ET"
+                tools:ignore="Autofill"
+                tools:labelFor="@id/stopTime50ET"/>
 
             <CheckBox
                 android:id="@+id/o2At30CheckBox"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="16dp"
-                android:layout_marginRight="16dp"
-                android:text="O2"
+                android:text="@string/o2_air_o2"
                 android:textSize="18sp"
                 app:layout_constraintBaseline_toBaselineOf="@+id/textView35"
                 app:layout_constraintEnd_toStartOf="@+id/textView35" />
@@ -221,7 +229,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="48dp"
-                android:layout_marginLeft="48dp"
                 android:layout_marginTop="16dp"
                 android:text="@string/stop_depth"
                 android:textColor="@color/colorTextSecondary"
@@ -234,7 +241,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="24dp"
-                android:layout_marginLeft="24dp"
                 android:text="@string/stop_time"
                 android:textColor="@color/colorTextSecondary"
                 android:textSize="18sp"
@@ -246,7 +252,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:text="60"
+                android:text="@string/_60_air_o2"
                 android:textColor="@color/colorTextSecondary"
                 android:textSize="18sp"
                 app:layout_constraintEnd_toEndOf="@+id/textView30"
@@ -258,7 +264,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:text="50"
+                android:text="@string/_50_air_o2"
                 android:textColor="@color/colorTextSecondary"
                 android:textSize="18sp"
                 app:layout_constraintEnd_toEndOf="@+id/textView32"
@@ -270,7 +276,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:text="40"
+                android:text="@string/_40_air_o2"
                 android:textColor="@color/colorTextSecondary"
                 android:textSize="18sp"
                 app:layout_constraintEnd_toEndOf="@+id/textView33"
@@ -282,7 +288,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:text="30"
+                android:text="@string/_30_air_o2"
                 android:textColor="@color/colorTextSecondary"
                 android:textSize="18sp"
                 app:layout_constraintEnd_toEndOf="@+id/textView34"
@@ -294,7 +300,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:text="20"
+                android:text="@string/_20_air_o2"
                 android:textColor="@color/colorTextSecondary"
                 android:textSize="18sp"
                 app:layout_constraintEnd_toEndOf="@+id/textView35"
@@ -306,8 +312,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="16dp"
-                android:layout_marginRight="16dp"
-                android:text="O2"
+                android:text="@string/o2_air_o2"
                 android:textSize="18sp"
                 app:layout_constraintBaseline_toBaselineOf="@+id/textView36"
                 app:layout_constraintEnd_toStartOf="@+id/textView36" />
@@ -319,7 +324,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
-            android:layout_marginLeft="24dp"
             android:layout_marginTop="24dp"
             android:text="@string/flood_vol_air"
             android:textColor="@color/colorTextSecondary"
@@ -333,21 +337,22 @@
             android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:layout_marginEnd="24dp"
-            android:layout_marginRight="24dp"
             android:background="@drawable/edit_text_border"
             android:ems="10"
             android:gravity="center"
             android:inputType="numberDecimal"
             android:textSize="20sp"
             app:layout_constraintBaseline_toBaselineOf="@+id/textView37"
-            app:layout_constraintEnd_toEndOf="parent" />
+            app:layout_constraintEnd_toEndOf="parent"
+            tools:ignore="Autofill"
+            tools:labelFor="@id/floodVolAirEditText"/>
 
         <Spinner
             android:id="@+id/floodVolAirSpinner"
             android:layout_width="100dp"
             android:layout_height="25dp"
             android:background="@drawable/spinner_background"
-            android:gravity="left"
+            android:gravity="start"
             app:layout_constraintEnd_toEndOf="@+id/floodVolAirEditText"
             app:layout_constraintStart_toStartOf="@+id/floodVolAirEditText"
             app:layout_constraintTop_toBottomOf="@+id/floodVolAirEditText" />
@@ -357,7 +362,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
-            android:layout_marginLeft="24dp"
             android:layout_marginTop="24dp"
             android:text="@string/number_of_flasks_air"
             android:textColor="@color/colorTextSecondary"
@@ -377,7 +381,9 @@
             android:textSize="20sp"
             app:layout_constraintBaseline_toBaselineOf="@+id/textView38"
             app:layout_constraintEnd_toEndOf="@+id/floodVolAirSpinner"
-            app:layout_constraintStart_toStartOf="@+id/floodVolAirSpinner" />
+            app:layout_constraintStart_toStartOf="@+id/floodVolAirSpinner"
+            tools:ignore="Autofill"
+            tools:labelFor="@id/numFlasksAirEditText"/>
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/o2ConstraintLayout"
@@ -395,7 +401,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="12dp"
-                android:layout_marginLeft="12dp"
                 android:layout_marginTop="16dp"
                 android:text="@string/flood_vol_o2"
                 android:textColor="@color/colorTextSecondary"
@@ -408,21 +413,22 @@
                 android:layout_width="80dp"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="12dp"
-                android:layout_marginRight="12dp"
                 android:background="@drawable/edit_text_border"
                 android:ems="10"
                 android:gravity="center"
                 android:inputType="numberDecimal"
                 android:textSize="18sp"
                 app:layout_constraintBaseline_toBaselineOf="@+id/textView39"
-                app:layout_constraintEnd_toEndOf="parent" />
+                app:layout_constraintEnd_toEndOf="parent"
+                tools:ignore="Autofill"
+                tools:labelFor="@id/floodVolO2EditText"/>
 
             <Spinner
                 android:id="@+id/floodVolO2Spinner"
                 android:layout_width="80dp"
                 android:layout_height="20dp"
                 android:background="@drawable/spinner_background"
-                android:gravity="left"
+                android:gravity="start"
                 app:layout_constraintEnd_toEndOf="@+id/floodVolO2EditText"
                 app:layout_constraintStart_toStartOf="@+id/floodVolO2EditText"
                 app:layout_constraintTop_toBottomOf="@+id/floodVolO2EditText" />
@@ -432,7 +438,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="12dp"
-                android:layout_marginLeft="12dp"
                 android:layout_marginTop="12dp"
                 android:layout_marginBottom="16dp"
                 android:text="@string/number_of_flasks_o2"
@@ -453,20 +458,22 @@
                 android:textSize="18sp"
                 app:layout_constraintBaseline_toBaselineOf="@+id/textView40"
                 app:layout_constraintEnd_toEndOf="@+id/floodVolO2Spinner"
-                app:layout_constraintStart_toStartOf="@+id/floodVolO2Spinner" />
+                app:layout_constraintStart_toStartOf="@+id/floodVolO2Spinner"
+                tools:ignore="Autofill"
+                tools:labelFor="@id/numFlasksO2EditText"/>
+
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <Button
             android:id="@+id/calcButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
-            android:layout_marginLeft="24dp"
+            android:layout_marginStart="16dp"
             android:layout_marginTop="48dp"
             android:background="@drawable/blue_button_shape"
             android:elevation="10dp"
             android:onClick="onClickAirO2"
-            android:padding="15dp"
+            android:padding="20dp"
             android:text="@string/button_calculate"
             android:textAppearance="@style/TextAppearance.MaterialComponents.Button"
             android:textColor="@color/colorTextPrimary"
@@ -479,10 +486,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"
-            android:layout_marginRight="8dp"
             android:text="@string/air_req_psig"
+            android:gravity="center"
             android:textColor="@color/colorTextSecondary"
-            android:textSize="16sp"
+            android:textSize="18sp"
             app:fontFamily="@font/roboto"
             app:layout_constraintBaseline_toBaselineOf="@+id/airRequiredTextView"
             app:layout_constraintEnd_toStartOf="@+id/airRequiredTextView" />
@@ -493,7 +500,6 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
             android:layout_marginEnd="24dp"
-            android:layout_marginRight="24dp"
             android:background="@drawable/edit_text_border"
             android:gravity="center"
             android:textSize="24sp"
@@ -506,12 +512,9 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
             android:layout_marginEnd="24dp"
-            android:layout_marginRight="24dp"
-            android:layout_marginBottom="24dp"
             android:background="@drawable/edit_text_border"
             android:gravity="center"
             android:textSize="24sp"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/airRequiredTextView" />
 
@@ -520,10 +523,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"
-            android:layout_marginRight="8dp"
+            android:gravity="center"
             android:text="@string/o2_req_psig"
             android:textColor="@color/colorTextSecondary"
-            android:textSize="16sp"
+            android:textSize="18sp"
             app:fontFamily="@font/roboto"
             app:layout_constraintBaseline_toBaselineOf="@+id/o2RequiredTextView"
             app:layout_constraintEnd_toStartOf="@+id/o2RequiredTextView" />

@@ -27,7 +27,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
-        android:layout_marginLeft="24dp"
         android:layout_marginTop="32dp"
         android:text="@string/depth"
         android:textColor="@color/colorTextSecondary"
@@ -49,14 +48,15 @@
         android:textSize="20sp"
         app:layout_constraintBaseline_toBaselineOf="@+id/textView2"
         app:layout_constraintEnd_toEndOf="@+id/cylPressureEditText"
-        app:layout_constraintStart_toStartOf="@+id/cylPressureEditText" />
+        app:layout_constraintStart_toStartOf="@+id/cylPressureEditText"
+        tools:ignore="Autofill"
+        tools:labelFor="@id/depthEditText"/>
 
     <TextView
         android:id="@+id/textView5"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
-        android:layout_marginLeft="24dp"
         android:layout_marginTop="24dp"
         android:gravity="center"
         android:text="@string/cylinder_pressure"
@@ -79,14 +79,15 @@
         android:textSize="20sp"
         app:layout_constraintBaseline_toBaselineOf="@+id/textView5"
         app:layout_constraintEnd_toEndOf="@+id/minCylPressureEditText"
-        app:layout_constraintStart_toStartOf="@+id/minCylPressureEditText" />
+        app:layout_constraintStart_toStartOf="@+id/minCylPressureEditText"
+        tools:ignore="Autofill"
+        tools:labelFor="@id/cylPressureEditText"/>
 
     <TextView
         android:id="@+id/textView6"
         android:layout_width="165dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
-        android:layout_marginLeft="24dp"
         android:layout_marginTop="24dp"
         android:gravity="center|start"
         android:text="@string/minimum_cylinder_pressure"
@@ -101,7 +102,6 @@
         android:layout_width="100dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="24dp"
-        android:layout_marginRight="24dp"
         android:background="@drawable/edit_text_border"
         android:ems="10"
         android:gravity="center"
@@ -110,14 +110,15 @@
         android:tag="2"
         android:textSize="20sp"
         app:layout_constraintBaseline_toBaselineOf="@+id/textView6"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:ignore="Autofill"
+        tools:labelFor="@id/minCylPressureEditText"/>
 
     <TextView
         android:id="@+id/textView7"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
-        android:layout_marginLeft="24dp"
         android:layout_marginTop="24dp"
         android:text="@string/floodable_volume"
         android:textColor="@color/colorTextSecondary"
@@ -139,7 +140,9 @@
         android:textSize="20sp"
         app:layout_constraintBaseline_toBaselineOf="@+id/textView7"
         app:layout_constraintEnd_toEndOf="@+id/minCylPressureEditText"
-        app:layout_constraintStart_toStartOf="@+id/minCylPressureEditText" />
+        app:layout_constraintStart_toStartOf="@+id/minCylPressureEditText"
+        tools:ignore="Autofill"
+        tools:labelFor="@id/floodVolEditText"/>
 
     <Spinner
         android:id="@+id/egsFloodVolET"
@@ -156,7 +159,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
-        android:layout_marginLeft="24dp"
         android:layout_marginTop="24dp"
         android:text="@string/number_of_flasks"
         android:textColor="@color/colorTextSecondary"
@@ -178,18 +180,19 @@
         android:textSize="20sp"
         app:layout_constraintBaseline_toBaselineOf="@+id/textView8"
         app:layout_constraintEnd_toEndOf="@+id/floodVolEditText"
-        app:layout_constraintStart_toStartOf="@+id/floodVolEditText" />
+        app:layout_constraintStart_toStartOf="@+id/floodVolEditText"
+        tools:ignore="Autofill"
+        tools:labelFor="@id/numFlasksEditText"/>
 
     <Button
         android:id="@+id/calculateButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
-        android:layout_marginLeft="24dp"
         android:layout_marginTop="48dp"
         android:background="@drawable/blue_button_shape"
         android:elevation="10dp"
-        android:onClick="onClick"
+        android:onClick="onClickScuba"
         android:padding="20dp"
         android:text="@string/button_calculate"
         android:textAppearance="@style/TextAppearance.MaterialComponents.Button"

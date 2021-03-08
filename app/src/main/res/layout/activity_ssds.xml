@@ -18,13 +18,14 @@
         android:dropDownSelector="@android:drawable/editbox_dropdown_light_frame"
         android:foregroundGravity="center"
         android:gravity="center"
-        android:paddingRight="10dp"
+        android:paddingEnd="10dp"
         android:spinnerMode="dropdown"
         android:textColor="@color/colorPrimary"
         android:textSize="30sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="RtlSymmetry" />
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/flFragment"

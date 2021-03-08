@@ -46,7 +46,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="12dp"
-            android:layout_marginRight="12dp"
             android:elevation="12dp"
             android:text="@string/conversions_button"
             android:textAllCaps="true"
@@ -88,7 +87,8 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.137"
-            app:srcCompat="@drawable/ssds" />
+            app:srcCompat="@drawable/ssds"
+            android:contentDescription="@string/ssds_icon" />
 
         <ImageButton
             android:id="@+id/scubaButton"
@@ -104,7 +104,8 @@
             app:layout_constraintEnd_toEndOf="@+id/ssdsButton"
             app:layout_constraintStart_toStartOf="@+id/ssdsButton"
             app:layout_constraintTop_toBottomOf="@+id/ssdsButton"
-            app:srcCompat="@drawable/scuba" />
+            app:srcCompat="@drawable/scuba"
+            android:contentDescription="@string/scuba_icon" />
 
         <ImageButton
             android:id="@+id/chamberButton"
@@ -120,7 +121,8 @@
             app:layout_constraintEnd_toEndOf="@+id/scubaButton"
             app:layout_constraintStart_toStartOf="@+id/scubaButton"
             app:layout_constraintTop_toBottomOf="@+id/scubaButton"
-            app:srcCompat="@drawable/chamber" />
+            app:srcCompat="@drawable/chamber"
+            android:contentDescription="@string/chamber_icon" />
 
         <ImageButton
             android:id="@+id/conversionsButton"
@@ -136,7 +138,8 @@
             app:layout_constraintEnd_toEndOf="@+id/chamberButton"
             app:layout_constraintStart_toStartOf="@+id/chamberButton"
             app:layout_constraintTop_toBottomOf="@+id/chamberButton"
-            app:srcCompat="@drawable/conversions" />
+            app:srcCompat="@drawable/conversions"
+            android:contentDescription="@string/conversion_icon" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 

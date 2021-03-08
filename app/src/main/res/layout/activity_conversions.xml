@@ -37,7 +37,9 @@
         app:layout_constraintEnd_toStartOf="@+id/editText2"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView4" />
+        app:layout_constraintTop_toBottomOf="@+id/textView4"
+        tools:ignore="Autofill"
+        tools:labelFor="@id/editText1"/>
 
     <EditText
         android:id="@+id/editText2"
@@ -55,7 +57,9 @@
         app:layout_constraintBaseline_toBaselineOf="@+id/editText1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/editText1" />
+        app:layout_constraintStart_toEndOf="@+id/editText1"
+        tools:ignore="Autofill"
+        tools:labelFor="@id/editText2"/>
 
     <Spinner
         android:id="@+id/spinner1"

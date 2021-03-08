@@ -16,6 +16,7 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 
@@ -62,9 +63,7 @@ public class SsdsAirO2Fragment extends Fragment {
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
-    /**
-     * Required empty public constructor.
-     */
+
     public SsdsAirO2Fragment() { }
 
     /**
@@ -82,19 +81,19 @@ public class SsdsAirO2Fragment extends Fragment {
     /**
      * Calculates the total air required during bottom phase of dive given the bottom depth,
      * number of divers, and total planned bottom time.
-     * @param bottomDepth Max depth planned for dive
+     * @param bottomDepth Planned depth of dive
      * @param numDivers Number of divers
      * @param bottomTime Total bottom time
      * @return Air required in SCF
      */
     private double calcAirBottomTime(int bottomDepth, int numDivers, int bottomTime) {
-        return ((bottomDepth +33.0) / 33) * 1.4 * numDivers * bottomTime;
+        return ((bottomDepth + 33.0) / 33) * 1.4 * numDivers * bottomTime;
     }
 
     /**
      * Calculates the total air required for ascent phase of the dive given the stage depth
      * and number of divers.
-     * @param bottomDepth Stage depth
+     * @param bottomDepth Planned depth of dive
      * @param numDivers Number of divers
      * @return Air required in SCF
      */
@@ -125,7 +124,7 @@ public class SsdsAirO2Fragment extends Fragment {
         int[] stopDepths = {60, 50, 40, 30, 20};
 
         for (int i = 0; i < STOP_TIME_IDS.length; i++) {
-            EditText t = getView().findViewById(STOP_TIME_IDS[i]);
+            EditText t = requireView().findViewById(STOP_TIME_IDS[i]);
             if (!t.getText().toString().trim().equalsIgnoreCase("")) {
                 if ((t.getId() != STOP_TIME_IDS[3] || !o2At30CheckBox.isChecked()) &&
                         (t.getId() != STOP_TIME_IDS[4] || !o2At20CheckBox.isChecked())) {
@@ -155,8 +154,8 @@ public class SsdsAirO2Fragment extends Fragment {
      */
     private double calcO2Stops(int numDivers) {
 
-        EditText o2At30Et = getView().findViewById(STOP_TIME_IDS[3]);
-        EditText o2At20Et = getView().findViewById(STOP_TIME_IDS[4]);
+        EditText o2At30Et = requireView().findViewById(STOP_TIME_IDS[3]);
+        EditText o2At20Et = requireView().findViewById(STOP_TIME_IDS[4]);
         double timeAt30 = Double.parseDouble(o2At30Et.getText().toString());
         double timeAt20 = Double.parseDouble(o2At20Et.getText().toString());
 
@@ -179,7 +178,7 @@ public class SsdsAirO2Fragment extends Fragment {
      * Converts total air in SCF to PSIG given bottom depth for MMP, floodable volume of flasks,
      * and the number of flasks.
      * @param totalAirSCF Total air in SCF
-     * @param bottomDepth Bottom Depth
+     * @param bottomDepth  Planned depth of dive
      * @param numFlasksAir Number of flasks
      * @param floodVolAir Floodable volume of flasks
      * @return Air required in PSIG
@@ -196,7 +195,7 @@ public class SsdsAirO2Fragment extends Fragment {
      * @param totalO2SCF Total O2 in SCF
      * @param numFlasksO2 Number of flasks
      * @param floodVolO2 Floodable volume of flasks
-     * @return
+     * @return O2 required in PSIG
      */
     private int calcO2Psig(double totalO2SCF, int numFlasksO2, double floodVolO2) {
         return (int) (((totalO2SCF * 14.7) / (numFlasksO2 * floodVolO2)) + ((30 * .445) + 200)) + 1;
@@ -211,7 +210,7 @@ public class SsdsAirO2Fragment extends Fragment {
         boolean isFilled = true;
 
         for (int id : EDITTEXT_IDS) {
-            EditText t = getView().findViewById(id);
+            EditText t = requireView().findViewById(id);
             if (t.getText().toString().trim().equalsIgnoreCase("")) {
                 t.setError("Enter a value");
                 isFilled = false;
@@ -222,8 +221,8 @@ public class SsdsAirO2Fragment extends Fragment {
         }
         if (decoRequiredCheckBox.isChecked()) {
             for (int i = 0; i < STOP_TIME_IDS.length - 1; i++) {
-                EditText t = getView().findViewById(STOP_TIME_IDS[i]);
-                EditText tNext = getView().findViewById(STOP_TIME_IDS[i + 1]);
+                EditText t = requireView().findViewById(STOP_TIME_IDS[i]);
+                EditText tNext = requireView().findViewById(STOP_TIME_IDS[i + 1]);
 
                 if (!t.getText().toString().trim().equalsIgnoreCase("") &&
                         tNext.getText().toString().trim().equalsIgnoreCase("")) {
@@ -239,7 +238,7 @@ public class SsdsAirO2Fragment extends Fragment {
             }
         }
         if (o2At20CheckBox.isChecked()) {
-            EditText o2At20 = getView().findViewById(R.id.stopTime20ET);
+            EditText o2At20 = requireView().findViewById(R.id.stopTime20ET);
             if (o2At20.getText().toString().trim().equalsIgnoreCase("")) {
                 o2At20.setError("Enter a value");
                 isFilled = false;
@@ -249,7 +248,7 @@ public class SsdsAirO2Fragment extends Fragment {
             }
 
             for (int id : O2_EDITTEXT_IDS) {
-                EditText t = getView().findViewById(id);
+                EditText t = requireView().findViewById(id);
                 if (t.getText().toString().trim().equalsIgnoreCase("")) {
                     t.setError("Enter a value");
                     isFilled = false;
@@ -260,7 +259,7 @@ public class SsdsAirO2Fragment extends Fragment {
             }
         }
         if (o2At30CheckBox.isChecked()) {
-            EditText o2At30 = getView().findViewById(R.id.stopTime30ET);
+            EditText o2At30 = requireView().findViewById(R.id.stopTime30ET);
             if (o2At30.getText().toString().trim().equalsIgnoreCase("")) {
                 o2At30.setError("Enter a value");
                 isFilled = false;
@@ -405,22 +404,22 @@ public class SsdsAirO2Fragment extends Fragment {
     }
 
     @SuppressLint("SetTextI18n")
-    public void onViewCreated(View view, Bundle savedInstanceState) {
+    public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
 
-        bottomDepthEditText = getView().findViewById(R.id.bottomDepthEditText);
-        bottomTimeEditText = getView().findViewById(R.id.bottomTimeEditText);
-        numberOfDiversEditText = getView().findViewById(R.id.numDiversEditText);
-        floodableVolumeAirEditText = getView().findViewById(R.id.floodVolAirEditText);
-        floodableVolUmeO2EditText =  getView().findViewById(R.id.floodVolO2EditText);
-        numberOfFlasksAirEditText =  getView().findViewById(R.id.numFlasksAirEditText);
-        numberOfFlasksO2EditText = getView().findViewById(R.id.numFlasksO2EditText);
-        o2RequiredTextView = getView().findViewById(R.id.o2RequiredTextView);
-        airRequiredTextView = getView().findViewById(R.id.airRequiredTextView);
+        bottomDepthEditText = requireView().findViewById(R.id.bottomDepthEditText);
+        bottomTimeEditText = requireView().findViewById(R.id.bottomTimeEditText);
+        numberOfDiversEditText = requireView().findViewById(R.id.numDiversEditText);
+        floodableVolumeAirEditText = requireView().findViewById(R.id.floodVolAirEditText);
+        floodableVolUmeO2EditText =  requireView().findViewById(R.id.floodVolO2EditText);
+        numberOfFlasksAirEditText =  requireView().findViewById(R.id.numFlasksAirEditText);
+        numberOfFlasksO2EditText = requireView().findViewById(R.id.numFlasksO2EditText);
+        o2RequiredTextView = requireView().findViewById(R.id.o2RequiredTextView);
+        airRequiredTextView = requireView().findViewById(R.id.airRequiredTextView);
 
         //Set Spinner Values
 
-        final Spinner floodVolAirSpinner =  getView().findViewById(R.id.floodVolAirSpinner);
-        final Spinner floodVolO2Spinner =  getView().findViewById(R.id.floodVolO2Spinner);
+        final Spinner floodVolAirSpinner =  requireView().findViewById(R.id.floodVolAirSpinner);
+        final Spinner floodVolO2Spinner =  requireView().findViewById(R.id.floodVolO2Spinner);
 
         ArrayAdapter<CharSequence> adapter;
         adapter = ArrayAdapter.createFromResource(getContext(),
@@ -456,12 +455,12 @@ public class SsdsAirO2Fragment extends Fragment {
         });
 
         //Decompression and O2 CheckBox + ConstraintLayouts
-        decoRequiredCheckBox = (CheckBox) getView().findViewById(R.id.decoRequiredCheckBox);
-        o2At30CheckBox = (CheckBox) getView().findViewById(R.id.o2At30CheckBox);
-        o2At20CheckBox = (CheckBox) getView().findViewById(R.id.o2At20CheckBox);
+        decoRequiredCheckBox = requireView().findViewById(R.id.decoRequiredCheckBox);
+        o2At30CheckBox = requireView().findViewById(R.id.o2At30CheckBox);
+        o2At20CheckBox = requireView().findViewById(R.id.o2At20CheckBox);
 
-        decoConstraintLayout = getView().findViewById(R.id.decoConstraintLayout);
-        o2ConstraintLayout = getView().findViewById(R.id.o2ConstraintLayout);
+        decoConstraintLayout = requireView().findViewById(R.id.decoConstraintLayout);
+        o2ConstraintLayout = requireView().findViewById(R.id.o2ConstraintLayout);
 
         //Listener for decoRequiredCheckbox to expand or collapse decoConstraintLayout
         decoRequiredCheckBox.setOnCheckedChangeListener(

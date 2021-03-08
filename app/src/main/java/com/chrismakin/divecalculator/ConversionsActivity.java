@@ -268,25 +268,24 @@ public class ConversionsActivity extends AppCompatActivity {
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.ssds:
-                Intent intent = new Intent(this, SsdsActivity.class);
-                this.startActivity(intent);
-                break;
-            case R.id.scuba:
-                intent = new Intent(this, ScubaActivity.class);
-                this.startActivity(intent);
-                break;
-            case R.id.chamber:
-                intent = new Intent(this, ChamberActivity.class);
-                this.startActivity(intent);
-                break;
-            case R.id.conversions:
-                intent = new Intent(this, ConversionsActivity.class);
-                this.startActivity(intent);
-                break;
-            default:
-                return super.onOptionsItemSelected(item);
+        int itemId = item.getItemId();
+        if (itemId == R.id.ssds) {
+            Intent intent = new Intent(this, SsdsActivity.class);
+            this.startActivity(intent);
+        } else if (itemId == R.id.scuba) {
+            Intent intent;
+            intent = new Intent(this, ScubaActivity.class);
+            this.startActivity(intent);
+        } else if (itemId == R.id.chamber) {
+            Intent intent;
+            intent = new Intent(this, ChamberActivity.class);
+            this.startActivity(intent);
+        } else if (itemId == R.id.conversions) {
+            Intent intent;
+            intent = new Intent(this, ConversionsActivity.class);
+            this.startActivity(intent);
+        } else {
+            return super.onOptionsItemSelected(item);
         }
 
         return true;

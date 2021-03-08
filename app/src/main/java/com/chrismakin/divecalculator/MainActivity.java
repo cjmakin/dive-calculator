@@ -16,21 +16,15 @@ public class MainActivity extends AppCompatActivity {
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
     public void onClick(View view) {
 
-        switch (view.getId()) {
-            case R.id.ssdsButton:
-                startSpecificActivity(SsdsActivity.class);
-                break;
-
-            case R.id.scubaButton:
-                startSpecificActivity(ScubaActivity.class);
-                break;
-
-            case R.id.chamberButton:
-                startSpecificActivity(ChamberActivity.class);
-                break;
-
-            case R.id.conversionsButton:
-                startSpecificActivity(ConversionsActivity.class);
+        int id = view.getId();
+        if (id == R.id.ssdsButton) {
+            startSpecificActivity(SsdsActivity.class);
+        } else if (id == R.id.scubaButton) {
+            startSpecificActivity(ScubaActivity.class);
+        } else if (id == R.id.chamberButton) {
+            startSpecificActivity(ChamberActivity.class);
+        } else if (id == R.id.conversionsButton) {
+            startSpecificActivity(ConversionsActivity.class);
         }
     }
 
